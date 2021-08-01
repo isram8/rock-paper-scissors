@@ -12,7 +12,7 @@ function playerPlay()
         playerChoice = prompt(`Rock, Paper or Scissors?
         Your score: ${playerScore}
         Computer Score: ${computerScore}`)
-        
+
         playerChoice.toLowerCase();
     }
     while (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") 
@@ -84,12 +84,29 @@ function game ()
     if (computerScore >= 3)
     {
         alert(`You lose! ${computerScore} to ${playerScore}`);
+        if (confirm("Want to play again?"))
+        {
+            playAgain();
+        }
     }
     else if (playerScore >=3)
     {
         alert(`You win! ${playerScore} to ${computerScore}`);
+        if (confirm("Want to play again?"))
+        {
+            playAgain();
+        }
     }
 
+    playerScore = 0;
+    computerScore = 0;
+}
+
+function playAgain()
+{
+    playerScore = 0;
+    computerScore = 0;
+    game();
 }
 
 
