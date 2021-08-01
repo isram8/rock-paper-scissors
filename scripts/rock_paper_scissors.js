@@ -1,6 +1,6 @@
 function computerPlay() 
 {
-    const computerChoice = ["Rock", "Paper", "Scissors"]
+    const computerChoice = ["rock", "paper", "scissors"]
     return computerChoice[Math.floor(Math.random() * 3)];
 }
 
@@ -9,47 +9,91 @@ function playerPlay()
     let playerChoice;
     do
     {
-        playerChoice = prompt("Rock, Paper or Scissors?")
+        playerChoice = prompt(`Rock, Paper or Scissors?
+        Your score: ${playerScore}
+        Computer Score: ${computerScore}`)
+        
+        playerChoice.toLowerCase();
     }
-    while (playerChoice != "Rock" && playerChoice != "Paper" && playerChoice != "Scissors") 
+    while (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") 
 
         return playerChoice;
 
 }
 
-let computerChoice = computerPlay();
-let playerChoice = playerPlay();
-
-function game(computerChoice, playerChoice) 
+function capitalize(word) 
 {
-    if (computerChoice === "Rock" && playerChoice === "Paper")
-    {
-        alert(`You win! ${playerChoice} beats ${computerChoice}`);
-    }
-    else if (computerChoice === "Paper" && playerChoice === "Scissors")
-    {
-        alert(`You win! ${playerChoice} beats ${computerChoice}`);
-    }
-    else if (computerChoice === "Scissors" && playerChoice === "Rock")
-    {
-        alert(`You win! ${playerChoice} beats ${computerChoice}`);
-    }
-    else if (computerChoice === "Paper" && playerChoice === "Rock")
-    {
-        alert(`You lose! ${computerChoice} beats ${playerChoice}`);
-    }
-    else if (computerChoice === "Rock" && playerChoice === "Scissors")
-    {
-        alert(`You lose! ${computerChoice} beats ${playerChoice}`);
-    } 
-    else if (computerChoice === "Scissors" && playerChoice === "Paper")
-    {
-        alert(`You lose! ${computerChoice} beats ${playerChoice}`);
-    }
-    else 
-    {
-        alert(`It's a tie! Both players chose ${computerChoice}`);
-    }
+    let capLetter = word.charAt(0).toUpperCase();
+    word = capLetter + word.substring(1);
+    return word;
 }
 
-game(computerChoice, playerChoice);
+let computerScore = 0;
+let playerScore = 0;
+
+function round(computerChoice, playerChoice) 
+{
+
+        if (computerChoice === "rock" && playerChoice === "paper")
+        {
+            alert(`You win! ${capitalize(playerChoice)} beats ${capitalize(computerChoice)}`);
+            playerScore++;
+        }
+        else if (computerChoice === "paper" && playerChoice === "scissors")
+        {
+            alert(`You win! ${capitalize(playerChoice)} beats ${capitalize(computerChoice)}`);
+            playerScore++;
+        }
+        else if (computerChoice === "scissors" && playerChoice === "rock")
+        {
+            alert(`You win! ${capitalize(playerChoice)} beats ${capitalize(computerChoice)}`);
+            playerScore++;
+        }
+        else if (computerChoice === "paper" && playerChoice === "rock")
+        {
+            alert(`You lose! ${capitalize(computerChoice)} beats ${capitalize(playerChoice)}`);
+            computerScore++;
+        }
+        else if (computerChoice === "rock" && playerChoice === "scissors")
+        {
+            alert(`You lose! ${capitalize(computerChoice)} beats ${capitalize(playerChoice)}`);
+            computerScore++;
+        } 
+        else if (computerChoice === "scissors" && playerChoice === "paper")
+        {
+            alert(`You lose! ${capitalize(computerChoice)} beats ${capitalize(playerChoice)}`);
+            computerScore++;
+        }
+        else 
+        {
+            alert(`It's a tie! Both players chose ${capitalize(computerChoice)}`);
+        }
+}
+
+
+function game ()
+{
+    
+    while(computerScore < 3 && playerScore < 3)
+    {
+        let computerChoice = computerPlay();
+        let playerChoice = playerPlay();
+        round(computerChoice, playerChoice);
+    }
+    
+    if (computerScore >= 3)
+    {
+        alert(`You lose! ${computerScore} to ${playerScore}`);
+    }
+    else if (playerScore >=3)
+    {
+        alert(`You win! ${playerScore} to ${computerScore}`);
+    }
+
+}
+
+
+    game();
+
+
+
